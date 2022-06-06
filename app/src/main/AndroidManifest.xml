@@ -10,19 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainingWeek_MusicPlayer">
         <activity
-            android:name=".musicplayer.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".musicplayer.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".musicplayer.LoginActivity"
+            android:name=".musicplayer.FirstScreen"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".musicplayer.MainActivity"
+            android:launchMode="singleTask"
+            android:exported="false" />
+        <activity
+            android:name=".musicplayer.RegisterActivity"
+            android:launchMode="singleTask"
+            android:exported="false" />
+        <activity
+            android:name=".musicplayer.LoginActivity"
+            android:launchMode="singleTask"
+            android:exported="true">
         </activity>
     </application>
 
