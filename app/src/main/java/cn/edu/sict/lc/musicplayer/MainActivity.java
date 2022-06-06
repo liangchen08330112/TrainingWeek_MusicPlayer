@@ -9,16 +9,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import cn.edu.sict.lc.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RadioGroup radioGroup;
-    private RadioButton radioButton_find,radioButton_my,radioButton_list;
-    private ViewPager2 viewPager2;
+    private TextView textView_find,textView_list,textView_my;
 
 
 
@@ -32,39 +32,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        radioGroup = findViewById(R.id.radioGroup);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId==R.id.radioButton_my){
-                    //自定义退出登录logout()方法
-                    startActivity(new Intent(MainActivity.this,MyActivity.class));
-                }
-            }
-        });
+        textView_find = findViewById(R.id.textView_find);
+        textView_list = findViewById(R.id.textView_list);
+        textView_my = findViewById(R.id.textView_my);
+
+        textView_my.setOnClickListener(this);
+        textView_list.setOnClickListener(this);
     }
 
-    //logout()方法退出登录
-    private void logout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.drawable.ic_ask).setTitle("提示").setMessage("是否退出登录？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setCancelable(true);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.textView_my:
+                startActivity(new Intent(this,MyActivity.class));
+                break;
+            case R.id.textView_list:
+                startActivity(new Intent(this,MusicListActivity.class));
+                break;
+        }
     }
 }
