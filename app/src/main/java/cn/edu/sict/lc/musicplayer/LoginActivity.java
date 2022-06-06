@@ -1,145 +1,47 @@
 package cn.edu.sict.lc.musicplayer;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import cn.edu.sict.lc.R;
+import cn.edu.sict.lc.dao.UserAccount;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText editText_username,editText_password;
-    private Button button_register,button_login;
+    private ImageView imageView;
+    private EditText editText_username;
+    private EditText editText_password;
+    private Button button_register;
+    private Button button_login;
+    private TextView textView;
     private CheckBox checkBox_rememberPassword;
+    private ImageButton imageButton_qq,imageButton_wechat,imageButton_weibo;
 
-    //定义常量，用于作为requestCode，确认是否由注册界面返回
     public static final int REGISTER_CODE = 0;
-    //定义标志，用于帮助“记住密码”功能，判断本页是否从注册页面返回并接收注册页面的回传数据（此时不能执行记住密码功能）
-    int requestCode = -1;
 
-    //数据库
-    SQLiteDatabase db;
+    int requestCode =-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         initView();
-
-        db = openOrCreateDatabase("MyUsers.db",MODE_PRIVATE,null);
-        db.execSQL("create table if not exists users(name varchar(12),password varchar(16),primary key(name))");
-    }
-    private void initView() {
-        editText_password = findViewById(R.id.editText_password);
-        editText_username = findViewById(R.id.editText_username);
-        button_register = findViewById(R.id.button_register);
-        button_login = findViewById(R.id.button_login);
-        checkBox_rememberPassword = findViewById(R.id.checkBox_rememberPassword);
-
-        button_register.setOnClickListener(this);
-        button_login.setOnClickListener(this);
-    }
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.button_register:
-                Intent intent = new Intent(this,RegisterActivity.class);
-                startActivityForResult(intent,REGISTER_CODE);
-                break;
-            case R.id.button_login:
-                //自定义一个登录方法login()
-                login();
-                break;
-            default:
-                break;
-        }
-    }
-    //自定义的登录方法login()
-    private void login() {
-        String name = editText_username.getText().toString().trim();
-        if (TextUtils.isEmpty(name)){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("请输入用户名").setIcon(R.drawable.ic_alert)
-                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
-        }
-        String password = editText_password.getText().toString().trim();
-        if (TextUtils.isEmpty(password)){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("请输入密码").setIcon(R.drawable.ic_alert)
-                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
-        }
-        try {
-            Cursor cursor = db.rawQuery("select password from users where name=?",new String[]{name});
-            String checkPassword = null;
-            if (cursor.getCount()==1){
-                cursor.moveToFirst();
-                checkPassword = cursor.getString(0);
-                if(checkPassword.equals(password)){
-                    writeSP(name,password);
-                    startActivity(new Intent(this,MainActivity.class));
-                }else{
-                    Toast.makeText(this,"用户名或密码错误",Toast.LENGTH_LONG).show();
-                }
-            }else{
-                Toast.makeText(this,"该用户不存在",Toast.LENGTH_LONG).show();
-            }
-        }catch (Exception e){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("系统异常，请稍后再试").setIcon(R.drawable.ic_alert)
-                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        this.requestCode=-1;
-        if (resultCode==RESULT_OK){
-            if(data!=null){
-                editText_username.setText(data.getStringExtra("name"));
-                editText_password.setText(data.getStringExtra("password"));
-                this.requestCode=requestCode;
-            }
-        }
     }
 
     @Override
@@ -150,12 +52,112 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void initView() {
+        imageView = (ImageView) findViewById(R.id.imageView);
+        editText_username = (EditText) findViewById(R.id.editText_username);
+        editText_password = (EditText) findViewById(R.id.editText_password);
+        button_register = (Button) findViewById(R.id.button_register);
+        button_login = (Button) findViewById(R.id.button_login);
+        imageButton_qq = findViewById(R.id.imageButton_qq);
+        imageButton_wechat = findViewById(R.id.imageButton_wechat);
+        imageButton_weibo = findViewById(R.id.imageButton_weibo);
+        checkBox_rememberPassword = findViewById(R.id.checkBox_rememberPassword);
+
+        button_register.setOnClickListener(this);
+        button_login.setOnClickListener(this);
+        imageButton_qq.setOnClickListener(this);
+        imageButton_wechat.setOnClickListener(this);
+        imageButton_weibo.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        String nm = editText_username.getText().toString().trim();
+        String pw = editText_password.getText().toString().trim();
+        switch (v.getId()) {
+            case R.id.button_register:
+                //点击注册按钮，跳转进入注册页面
+                startActivity(new Intent(this, RegisterActivity.class));
+                break;
+            case R.id.button_login:
+                /*
+                 * 逻辑：首先判断是否为空，如实为空，则自动报错
+                 * 2.在此判断输入的用户是否在数据库里面，并且进行比较，如实正确，则进行登录
+                 * */
+                UserAccount account = new UserAccount(this);
+                if (nm.equals("") || pw.equals("")) {
+                    Toast.makeText(this, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(this, MainActivity.class));
+//                    Toast.makeText(this,"登录成功",Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    String condition = "用户不存在";
+
+                    Cursor cursor = account.getDb().rawQuery("select name,password from users where name=?", new String[]{nm});
+                    while (cursor.moveToNext()) {
+                        condition = cursor.getString(1);
+                    }
+
+                    cursor.close();//关门游标
+                    if (condition.equals("用户不存在")) {
+                        Toast.makeText(this, "用户不存在", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else {
+                        if (condition.equals(pw)){
+                            writeSP(nm,pw);
+                            startActivity(new Intent(this, MainActivity.class));
+                            Toast.makeText(this,"登录成功",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+                break;
+            case R.id.imageButton_qq:
+                Toast.makeText(this,"QQ登录",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.imageButton_wechat:
+                Toast.makeText(this,"微信登录",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.imageButton_weibo:
+                Toast.makeText(this,"微博登录",Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+            }
+        }
+
+    private void writeSP(String nm, String pw) {
+        SharedPreferences sp = getSharedPreferences("UserRecord",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        if(checkBox_rememberPassword.isChecked()){
+            editor.putBoolean("remember",true);
+            editor.putString("username",nm);
+            editor.putString("password",pw);
+        }else {
+            editor.putBoolean("remember",false);
+        }
+        editor.commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        this.requestCode=-1;
+        if(resultCode==RESULT_OK){
+            if(data!=null){
+                editText_username.setText(data.getStringExtra("username"));
+                editText_password.setText(data.getStringExtra("password"));
+                this.requestCode=requestCode;
+            }
+        }
+    }
     private void readSP() {
         SharedPreferences sp = getSharedPreferences("UserRecord",MODE_PRIVATE);
         if(sp.getBoolean("remember",false)){
-            String name = sp.getString("name","");
+            String username = sp.getString("username","");
             String password = sp.getString("password","");
-            editText_username.setText(name);
+            editText_username.setText(username);
             editText_password.setText(password);
             checkBox_rememberPassword.setChecked(true);
         }else {
@@ -164,23 +166,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             checkBox_rememberPassword.setChecked(false);
         }
     }
-    //定义记住密码的写入方法
-    private void writeSP(String name, String password) {
-        SharedPreferences sp = getSharedPreferences("UserRecord", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        if (checkBox_rememberPassword.isChecked()){
-            editor.putBoolean("remember",true);
-            editor.putString("name",name);
-            editor.putString("password",password);
-        }else {
-            editor.putBoolean("remember",false);
-        }
-        editor.commit();
-    }
 
     @Override
     protected void onDestroy() {
-        db.close();
         super.onDestroy();
     }
 }

@@ -20,18 +20,20 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".musicplayer.LoginActivity"
+            android:launchMode="singleTask"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".musicplayer.RegisterActivity"
+            android:label="新用户注册"
+            android:exported="true"
+            android:parentActivityName=".musicplayer.LoginActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".musicplayer.MainActivity"
             android:launchMode="singleTask"
             android:exported="false" />
-        <activity
-            android:name=".musicplayer.RegisterActivity"
-            android:launchMode="singleTask"
-            android:exported="false" />
-        <activity
-            android:name=".musicplayer.LoginActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
-        </activity>
     </application>
 
 </manifest>

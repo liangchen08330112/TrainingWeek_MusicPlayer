@@ -14,4 +14,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="HomeActivity_Background">#FF0000</color>
+    <color name="tab_checked">#FFFF00</color>				<!-- 主页滑动时被选中的tab的标题和下滑横杠颜色 -->
+    <color name="tab_not_checked">#CDC673</color>
+    <color name="home_title_background">#4a4834</color>
 </resources>

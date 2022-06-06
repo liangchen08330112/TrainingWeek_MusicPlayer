@@ -7,11 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".musicplayer.RegisterActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="540dp"
-        android:background="@drawable/card_style"
-
         android:orientation="vertical">
 
         <EditText
@@ -21,20 +20,19 @@
             android:layout_gravity="center"
             android:layout_marginBottom="35dp"
             android:layout_marginTop="60dp"
-            android:background="@drawable/et_style"
+            android:background="@drawable/et_style_register"
             android:ems="11"
             android:inputType="textPersonName"
             android:padding="5dp"
             android:gravity="center"
-            android:hint="请输入用户名"
-            />
+            android:hint="请输入用户名" />
 
         <EditText
             android:id="@+id/editText_password"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/et_style"
+            android:background="@drawable/et_style_register"
             android:ems="10"
             android:padding="5dp"
             android:gravity="center"
@@ -46,7 +44,7 @@
             android:layout_height="50dp"
             android:layout_margin="35dp"
             android:layout_gravity="center"
-            android:background="@drawable/et_style"
+            android:background="@drawable/et_style_register"
             android:ems="10"
             android:padding="5dp"
             android:gravity="center"
@@ -66,8 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_style"
-                android:textColor="#5F6468"
+                android:background="@drawable/btn_style_register"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:text="确认注册" />
         </LinearLayout>

@@ -1,123 +1,115 @@
 package cn.edu.sict.lc.musicplayer;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Locale;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import cn.edu.sict.lc.R;
 import cn.edu.sict.lc.dao.UserAccount;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText editText_username,editText_password,editText_confirm;
+    private EditText editText_username;
+    private EditText editText_password;
+    private EditText editText_confirm;
     private Button button_confirm;
-    String name = null;
-    String password = null;
-    String password_confirm = null;
-
-    SQLiteDatabase db;
+    String name=null;
+    String password=null;
+    String password_confirm=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
-
-        db = openOrCreateDatabase("users.db",MODE_PRIVATE,null);
-        db.execSQL("create table if not exists users(name varchar(12),password varchar(16),primary key(name))");
     }
 
     private void initView() {
-        editText_username = findViewById(R.id.editText_username);
-        editText_password = findViewById(R.id.editText_password);
-        editText_confirm = findViewById(R.id.editText_confirm);
-        button_confirm = findViewById(R.id.button_confirm);
+        editText_username = (EditText) findViewById(R.id.editText_username);
+        editText_password = (EditText) findViewById(R.id.editText_password);
+        editText_confirm = (EditText) findViewById(R.id.editText_confirm);
+        button_confirm = (Button) findViewById(R.id.button_confirm);
+        button_confirm.setOnClickListener(this);
+    }
 
-        button_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button_confirm:
                 if(isEmptyForText()){
                     if(isSamePassword()){
-                        UserAccount account = new UserAccount(RegisterActivity.this);
+                        //将注册信息存入数据库
+                        UserAccount account =new UserAccount(this);
                         try {
-                            account.getDb().execSQL("insert into users(name,password) values(?,?)",new String[]{name,password});
-                            Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_LONG).show();
-                            Log.i("注册页面","注册成功，数据已保存");
-                            //注册成功，返回登录界面
-                            Intent intent = getIntent();
-                            intent.putExtra("name",name);
-                            intent.putExtra("password",password);
-                            setResult(RESULT_OK,intent);
-                            finish();
-                        }catch (Exception e){
-                            Log.e("注册页面","发生异常");
-                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                            builder.setTitle("提示").setMessage("系统异常，请稍后重试。").setIcon(R.drawable.ic_alert)
-                                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+                            account.getDb().execSQL("insert into users(name,password)values(?,?)", new String[]{name,password});
+                            Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e){
+                            Toast.makeText(this, "插入失败，语法有错误！", Toast.LENGTH_SHORT).show();
                         }
+
+                        //注册成功，返回登录页面
+                        startActivity(new Intent(this,LoginActivity.class));
                     }
                 }
-            }
-        });
+                break;
+        }
     }
+
     //判断输入内容是否为空
     public boolean isEmptyForText(){
-        //获取用户名、密码和确认密码信息。
-        name = editText_username.getText().toString().trim();
-        password = editText_password.getText().toString().trim();
-        password_confirm = editText_confirm.getText().toString().trim();
-        //
+        name= editText_username.getText().toString().trim();
+        password= editText_password.getText().toString().trim();
+        password_confirm= editText_confirm.getText().toString().trim();
+//        if(name.isEmpty()|password.isEmpty()|password_confirm.isEmpty()){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setIcon(R.drawable.ic_alert).setTitle("提示").setMessage("输入内容为空！");
+//            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    dialogInterface.dismiss();
+//                }
+//            });
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
+//            return false;
+//        }
         if(name.isEmpty()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("请输入用户名").setIcon(R.drawable.ic_alert)
-                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            builder.setIcon(R.drawable.ic_alert).setTitle("提示").setMessage("用户名不得为空！");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
                 }
             });
             AlertDialog dialog = builder.create();
             dialog.show();
             return false;
-        }else if (password.isEmpty()){
+        }else if(password.isEmpty()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("请输入密码").setIcon(R.drawable.ic_alert)
-                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            builder.setIcon(R.drawable.ic_alert).setTitle("提示").setMessage("密码不得为空！");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
                 }
             });
             AlertDialog dialog = builder.create();
             dialog.show();
             return false;
-        }else if (password_confirm.isEmpty()){
+        }else if(password_confirm.isEmpty()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("请确认密码").setIcon(R.drawable.ic_alert)
-                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            builder.setIcon(R.drawable.ic_alert).setTitle("提示").setMessage("您未确认密码！");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
                 }
             });
             AlertDialog dialog = builder.create();
@@ -128,17 +120,17 @@ public class RegisterActivity extends AppCompatActivity {
     }
     //判断两次输入的密码是否相同
     public boolean isSamePassword(){
-        password = editText_password.getText().toString().trim();
-        password_confirm = editText_confirm.getText().toString().trim();
-        if (password.equals(password_confirm)){
+        password= editText_password.getText().toString().trim();
+        password_confirm= editText_confirm.getText().toString().trim();
+        if(password.equals(password_confirm)){
             return true;
-        }else{
+        }else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("两次输入的密码不一致，请检查后重新注册").setIcon(R.drawable.ic_alert)
-                    .setCancelable(true).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            builder.setIcon(R.drawable.ic_alert).setTitle("提示").setMessage("两次输入的密码不一致，请重新输入。");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
                 }
             });
             AlertDialog dialog = builder.create();

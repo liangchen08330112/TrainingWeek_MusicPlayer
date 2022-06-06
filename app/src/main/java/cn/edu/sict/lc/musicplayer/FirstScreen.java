@@ -1,5 +1,6 @@
 package cn.edu.sict.lc.musicplayer;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,8 @@ public class FirstScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         AsyncTaskClass taskClass = new AsyncTaskClass();
         taskClass.execute(2);
     }

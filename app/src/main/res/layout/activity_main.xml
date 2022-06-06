@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".musicplayer.MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="60dp"
+        android:background="@color/HomeActivity_Background">
+
+        <RadioButton
+            android:id="@+id/radioButton_find"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/HomeActivity_Background"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:button="@null"
+            android:checked="true"
+            android:text="发现" />
+
+        <RadioButton
+            android:id="@+id/radioButton_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@color/HomeActivity_Background"
+            android:textSize="20sp"
+            android:button="@null"
+            android:textColor="@color/white"
+            android:checked="true"
+            android:text="音乐列表" />
+
+        <RadioButton
+            android:id="@+id/radioButton_my"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@color/HomeActivity_Background"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:button="@null"
+            android:checked="true"
+            android:text="我的" />
+    </RadioGroup>
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:id="@+id/viewPager2" />
+</LinearLayout>
