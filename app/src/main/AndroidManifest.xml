@@ -10,9 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainingWeek_MusicPlayer">
         <activity
+            android:name=".musicplayer.MusicListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".musicplayer.MyActivity"
+            android:exported="false" />
+        <activity
             android:name=".musicplayer.FirstScreen"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,19 +27,18 @@
         </activity>
         <activity
             android:name=".musicplayer.LoginActivity"
-            android:launchMode="singleTask"
-            android:exported="true" >
-        </activity>
-        <activity
-            android:name=".musicplayer.RegisterActivity"
-            android:label="新用户注册"
             android:exported="true"
-            android:parentActivityName=".musicplayer.LoginActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".musicplayer.MainActivity"
+            android:name=".musicplayer.RegisterActivity"
+            android:exported="true"
+            android:label="新用户注册"
             android:launchMode="singleTask"
-            android:exported="false" />
+            android:parentActivityName=".musicplayer.LoginActivity" />
+        <activity
+            android:name=".musicplayer.MainActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

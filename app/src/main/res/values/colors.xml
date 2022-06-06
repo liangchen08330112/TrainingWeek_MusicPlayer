@@ -18,4 +18,6 @@
     <color name="tab_checked">#FFFF00</color>				<!-- 主页滑动时被选中的tab的标题和下滑横杠颜色 -->
     <color name="tab_not_checked">#CDC673</color>
     <color name="home_title_background">#4a4834</color>
+    <color name="button_background">#DD2121</color>
+    <color name="grid_item_background">#80a5a09d</color>
 </resources>
