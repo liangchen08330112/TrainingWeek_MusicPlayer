@@ -63,11 +63,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/layout_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_title"
+        app:layout_constraintEnd_toEndOf="@id/layout_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/layout_title"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title"
         app:layout_constraintVertical_weight="0.77" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,6 +81,139 @@
         app:layout_constraintTop_toBottomOf="@id/recyclerView"
         app:layout_constraintVertical_weight="0.15"
         android:orientation="vertical"
-        android:background="@color/home_bottom_background" />
+        android:background="@color/button_background" >
+
+        <TextView
+            android:id="@+id/textView_currentTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:gravity="left|center_vertical"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textView_songName"
+            app:layout_constraintEnd_toStartOf="@id/seekBar"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintVertical_weight="1" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:indeterminate="false"
+            app:layout_constraintHorizontal_weight="6"
+            app:layout_constraintBottom_toBottomOf="@id/textView_currentTime"
+            app:layout_constraintEnd_toStartOf="@id/textView_finishTime"
+            app:layout_constraintStart_toEndOf="@id/textView_currentTime"
+            app:layout_constraintTop_toTopOf="@id/textView_currentTime" />
+
+        <TextView
+            android:id="@+id/textView_finishTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:layout_marginRight="5dp"
+            android:gravity="left|center_vertical"
+            app:layout_constraintBottom_toBottomOf="@id/textView_currentTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/seekBar"
+            app:layout_constraintTop_toTopOf="@id/textView_currentTime" />
+
+        <ImageView
+            android:id="@+id/imageView_song"
+            android:src="@drawable/ic_song"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1.2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/textView_songName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView_songName" />
+
+        <TextView
+            android:id="@+id/textView_songName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="歌曲："
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:gravity="left|center_vertical"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintVertical_weight="1.5"
+            app:layout_constraintBottom_toTopOf="@id/textView_singerName"
+            app:layout_constraintEnd_toStartOf="@id/imageView_previous"
+            app:layout_constraintStart_toEndOf="@id/imageView_song"
+            app:layout_constraintTop_toBottomOf="@id/textView_currentTime" />
+
+        <TextView
+            android:text="歌手："
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:gravity="left|center_vertical"
+            android:id="@+id/textView_singerName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1.5"
+            app:layout_constraintStart_toStartOf="@id/textView_songName"
+            app:layout_constraintEnd_toEndOf="@id/textView_songName"
+            app:layout_constraintBottom_toTopOf="@id/textView_length"
+            app:layout_constraintTop_toBottomOf="@id/textView_songName"/>
+
+        <TextView
+            android:id="@+id/textView_length"
+            android:text="时长："
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:gravity="left|center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1.5"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintStart_toStartOf="@id/textView_songName"
+            app:layout_constraintEnd_toEndOf="@id/textView_songName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_singerName" />
+
+        <ImageView
+            android:id="@+id/imageView_previous"
+            android:src="@drawable/ic_previous"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageView_play"
+            app:layout_constraintStart_toEndOf="@id/textView_songName"
+            app:layout_constraintTop_toTopOf="@id/textView_songName" />
+
+        <ImageView
+            android:id="@+id/imageView_play"
+            android:src="@drawable/ic_play"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageView_next"
+            app:layout_constraintStart_toEndOf="@id/imageView_previous"
+            app:layout_constraintTop_toTopOf="@id/textView_songName" />
+
+        <ImageView
+            android:id="@+id/imageView_next"
+            android:src="@drawable/ic_next"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView_play"
+            app:layout_constraintTop_toTopOf="@id/textView_songName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
