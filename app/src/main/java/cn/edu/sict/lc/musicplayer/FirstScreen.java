@@ -19,8 +19,6 @@ public class FirstScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);
         initView();
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
         AsyncTaskClass taskClass = new AsyncTaskClass();
         taskClass.execute(3);
     }

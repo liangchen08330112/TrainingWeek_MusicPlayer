@@ -8,43 +8,90 @@
     tools:context=".musicplayer.MainActivity">
 
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/radioGroup_title"
+        android:background="@color/home_title_background"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/button_background"
-        android:orientation="horizontal">
+        android:layout_height="50dp" >
 
-        <TextView
-            android:id="@+id/textView_find"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+        <RadioButton
+            android:id="@+id/radioButton_find"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/tab_checked"
+            android:background="@drawable/home_title_selector"
+            android:checked="true"
+            android:textSize="18sp"
+            android:button="@null"
             android:layout_weight="1"
             android:text="发现" />
 
-        <TextView
-            android:id="@+id/textView_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+        <RadioButton
+            android:id="@+id/radioButton_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/tab_not_checked"
+            android:background="@drawable/home_title_selector"
+            android:textSize="18sp"
+            android:button="@null"
             android:layout_weight="1"
             android:text="音乐列表" />
 
-        <TextView
-            android:id="@+id/textView_my"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+        <RadioButton
+            android:id="@+id/radioButton_my"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/tab_not_checked"
+            android:background="@drawable/home_title_selector"
+            android:checked="true"
+            android:textSize="18sp"
+            android:button="@null"
             android:layout_weight="1"
             android:text="我的" />
+    </RadioGroup>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <SeekBar
+                android:id="@+id/seekBar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
+
     </LinearLayout>
+
+
 </LinearLayout>

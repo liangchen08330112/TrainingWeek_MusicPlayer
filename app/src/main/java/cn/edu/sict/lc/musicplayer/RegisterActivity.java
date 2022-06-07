@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText editText_password;
     private EditText editText_confirm;
     private Button button_confirm;
+    private ImageButton imageButton_back;
     String name=null;
     String password=null;
     String password_confirm=null;
@@ -35,7 +37,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editText_password = (EditText) findViewById(R.id.editText_password);
         editText_confirm = (EditText) findViewById(R.id.editText_confirm);
         button_confirm = (Button) findViewById(R.id.button_confirm);
+        imageButton_back = (ImageButton) findViewById(R.id.imageButton_back);
         button_confirm.setOnClickListener(this);
+        imageButton_back.setOnClickListener(this);
     }
 
     @Override
@@ -50,13 +54,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             account.getDb().execSQL("insert into users(name,password)values(?,?)", new String[]{name,password});
                             Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
                         } catch (Exception e){
-                            Toast.makeText(this, "插入失败，语法有错误！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
                         }
-
                         //注册成功，返回登录页面
                         startActivity(new Intent(this,LoginActivity.class));
                     }
                 }
+                break;
+            case R.id.imageButton_back:
+                startActivity(new Intent(this,LoginActivity.class));
+                break;
+            default:
                 break;
         }
     }

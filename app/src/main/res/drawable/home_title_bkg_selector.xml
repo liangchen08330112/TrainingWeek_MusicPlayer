@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"><!--选中时-->
+        <layer-list>
+            <!--下层画布，黄色-->
+            <item>
+                <shape>
+                    <solid android:color="@color/tab_checked" />
+                </shape>
+            </item>
+            <!--上层画布，背景色，向上移3dp-->
+            <item android:bottom="3dp">
+                <shape>
+                    <solid android:color="#DD2121" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item><!--最后一个item不设置state_pressed时表示所有其他状态(只有在最后才能不写state_pressed不然之后的item会被忽略)-->
+        <layer-list>
+            <!--下层画布，黄色-->
+            <item>
+                <shape>
+                    <solid android:color="#FFFFFF" />
+                </shape>
+            </item>
+            <!--上层画布，背景色，向上移3dp-->
+            <item android:bottom="3dp">
+                <shape>
+                    <solid android:color="@color/HomeActivity_Background" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

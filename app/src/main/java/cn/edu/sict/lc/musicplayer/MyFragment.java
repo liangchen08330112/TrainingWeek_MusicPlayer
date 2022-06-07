@@ -1,14 +1,19 @@
 package cn.edu.sict.lc.musicplayer;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -18,7 +23,7 @@ import cn.edu.sict.lc.R;
 import cn.edu.sict.lc.adapter.MyGridAdapter;
 import cn.edu.sict.lc.bean.MyGridBean;
 
-public class MyActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyFragment extends Fragment implements View.OnClickListener {
 
     private Button button_logout, button_local;
     private GridView gridView_functions,gridView_label;
@@ -32,21 +37,19 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     String[] titles_label = {"跑步","学习","开车","旅行","聚会","下午茶","睡眠","阅读","沉思"};
 
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
-        initView();
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_my,container,false);
+        initView(view);
+        return view;
     }
 
-    private void initView() {
-        button_logout = findViewById(R.id.button_logout);
-        button_local = findViewById(R.id.button_local);
-        gridView_functions = findViewById(R.id.gridView_functions);
-        gridView_label = findViewById(R.id.gridView_label);
+    private void initView(View view) {
+        button_logout = view.findViewById(R.id.button_logout);
+        button_local = view.findViewById(R.id.button_local);
+        gridView_functions = view.findViewById(R.id.gridView_functions);
+        gridView_label = view.findViewById(R.id.gridView_label);
 
         button_logout.setOnClickListener(this);
         button_local.setOnClickListener(this);
@@ -58,7 +61,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
 
     private void initGridView(GridView gridView, int[] imgSrcs, String[] titles) {
         ArrayList<MyGridBean> list = initData(imgSrcs,titles);
-        MyGridAdapter adapter = new MyGridAdapter(MyActivity.this,list);
+        MyGridAdapter adapter = new MyGridAdapter(getActivity(),list);
         gridView.setAdapter(adapter);
     }
 
@@ -78,7 +81,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 logout();
                 break;
             case R.id.button_local:
-                startActivity(new Intent(this,MusicListActivity.class));
+                startActivity(new Intent(getActivity(),MusicListActivity.class));
                 break;
             default:
                 break;
@@ -86,13 +89,13 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     }
     //logout()方法退出登录
     private void logout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.drawable.ic_ask).setTitle("提示").setMessage("是否退出登录？")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        finish();
+                        startActivity(new Intent(getActivity(),LoginActivity.class));
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {

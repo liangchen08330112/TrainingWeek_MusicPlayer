@@ -13,7 +13,7 @@
             android:name=".musicplayer.MusicListActivity"
             android:exported="false" />
         <activity
-            android:name=".musicplayer.MyActivity"
+            android:name=".musicplayer.MyFragment"
             android:exported="false" />
         <activity
             android:name=".musicplayer.FirstScreen"
