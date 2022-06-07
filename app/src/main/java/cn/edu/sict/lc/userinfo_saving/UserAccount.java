@@ -1,4 +1,4 @@
-package cn.edu.sict.lc.dao;
+package cn.edu.sict.lc.userinfo_saving;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import cn.edu.sict.lc.R;
-import cn.edu.sict.lc.dao.UserAccount;
+import cn.edu.sict.lc.userinfo_saving.UserAccount;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 

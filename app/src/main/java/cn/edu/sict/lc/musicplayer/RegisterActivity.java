@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import cn.edu.sict.lc.R;
-import cn.edu.sict.lc.dao.UserAccount;
+import cn.edu.sict.lc.userinfo_saving.UserAccount;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
