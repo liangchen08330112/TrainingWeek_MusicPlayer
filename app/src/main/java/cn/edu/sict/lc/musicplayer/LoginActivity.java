@@ -1,8 +1,11 @@
 package cn.edu.sict.lc.musicplayer;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +15,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.ActivityCompat;
 import cn.edu.sict.lc.R;
 import cn.edu.sict.lc.dao.UserAccount;
 
@@ -35,11 +36,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     int requestCode =-1;
 
+    //请求状态码
+    private static int REQUEST_PERMISSION_CODE = 222;
+    //读写权限
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+
+        //循环申请字符串数组里面所有的权限
+        //判断当前API版本是否大于LOLLIPOP版本，也可写成Build.VERSION.SDK_INT>23,判断当前版本是否大于23
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            //检查一下本应用的权限列表中是否包含READ_EXTERNAL_STORAGE，若没有就提示用户添加权限
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                //若是没授权循环请求PERMISSIONS_STORAGE内权限，并回调onRequestPermissionsResult方法
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
+            }
+        }
+    }
+
+    //调用完requestPermissions方法后，自动回调onRequestPermissionsResult方法
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {        //判断返回的请求码是否为requestPermissions中的请求码
+            case 222:       //每当请求权限成功后会向grantResults[]返回一个值
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //提示用户申请成功
+                    Toast.makeText(this, "用户申请权限成功", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "用户申请权限失败", Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

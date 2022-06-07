@@ -48,7 +48,6 @@ public class MusicListActivity extends AppCompatActivity implements View.OnClick
         recyclerView.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
-
     }
 
     private void initData() {
