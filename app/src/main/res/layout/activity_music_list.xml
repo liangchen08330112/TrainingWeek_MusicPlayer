@@ -63,7 +63,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="530dp"
         android:background="#F6F6F6"
         app:layout_constraintEnd_toEndOf="@id/layout_title"
         app:layout_constraintHorizontal_bias="0.0"
@@ -71,65 +71,112 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_title"
         app:layout_constraintVertical_weight="0.77" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="0dp"
-        app:layout_constraintVertical_weight="0.09"
         android:background="@color/HomeActivity_Background"
         android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_weight="0.09">
 
-        <ImageView
-            android:id="@+id/imageView_play"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_play"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/imageView_next"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView_next"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/imageView_list"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView_list"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_list"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout_time"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.645"
+            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.555"
-            app:srcCompat="@drawable/ic_previous" />
+            app:layout_constraintVertical_bias="0.053">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView_currentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_gravity="center"
+                style="@style/Widget.SeekBar.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView_totalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_songName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="歌曲名：" />
+
+            <TextView
+                android:id="@+id/textView_singer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:text="歌手：" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:paddingRight="20dp"
+                app:srcCompat="@drawable/icon_prev2" />
+
+            <ImageButton
+                android:id="@+id/imageButton_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:paddingRight="20dp"
+                app:srcCompat="@drawable/ic_play" />
+
+            <ImageButton
+                android:id="@+id/imageButton_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                app:srcCompat="@drawable/icon_next2" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static final int REGISTER_CODE = 0;
 
-    int requestCode =-1;
+    int requestCode = -1;
 
     //请求状态码
     private static int REQUEST_PERMISSION_CODE = 222;
@@ -69,9 +69,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case 222:       //每当请求权限成功后会向grantResults[]返回一个值
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //提示用户申请成功
-                    Toast.makeText(this, "用户申请权限成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "权限申请成功", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this, "用户申请权限失败", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "权限申请失败，请到设置中手动申请权限！", Toast.LENGTH_LONG).show();
                 }
                 break;
             default:

@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView4"
+    <GridView
+        android:numColumns="5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="关注列表" />
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

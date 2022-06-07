@@ -19,15 +19,19 @@
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/drawable/ic_play.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/drawable/ic_previous.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/drawable/ic_search.xml" value="0.1425" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/drawable/seek_horizontal.xml" value="0.14" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/drawable/seek_progress.xml" value="0.1" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/drawable/seek_thumb.xml" value="0.1" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/drawable/seekbar_background.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_first_screen.xml" value="0.24947916666666667" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_music_list.xml" value="0.1" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_music_list.xml" value="0.4" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_my.xml" value="0.264" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_my_config.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_config.xml" value="0.12082066869300911" />
-        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_list.xml" value="0.1" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_list.xml" value="0.264" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_my.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_net.xml" value="0.128" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/grid_config.xml" value="0.24947916666666667" />
