@@ -64,4 +64,14 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
             this.textView_singer = view.findViewById(R.id.textView_singer);
         }
     }
+    public interface onItemClickListener {
+        void onItemClick(RecyclerView parent, View view, int position);
+    }
+
+    public interface MyAdapter {
+        interface onRVItemClickListener {
+            void onClick(int position);
+        }
+
+    }
 }

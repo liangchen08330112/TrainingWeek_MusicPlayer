@@ -24,11 +24,13 @@
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_music_list.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_my.xml" value="0.264" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_my_config.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_config.xml" value="0.12082066869300911" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_list.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_my.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/fragment_net.xml" value="0.128" />
+        <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/grid_config.xml" value="0.24947916666666667" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/griditem.xml" value="0.1" />
         <entry key="..\:/TrainingWeek_MusicPlayer/app/src/main/res/layout/music_list_item.xml" value="0.4" />
       </map>

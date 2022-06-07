@@ -2,9 +2,7 @@ package cn.edu.sict.lc.musicplayer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
@@ -27,7 +25,7 @@ import cn.edu.sict.lc.util.MusicUtil;
 
 public class MyFragment extends Fragment implements View.OnClickListener {
 
-    private Button button_logout, button_local;
+    private Button button_config, button_local;
     private GridView gridView_functions,gridView_label;
     int[] imgSrcs_function = {R.drawable.ic_playhistory,R.drawable.ic_download,R.drawable.ic_cloud,
                               R.drawable.ic_purchase,R.drawable.ic_friends,R.drawable.ic_bookmarks,
@@ -48,12 +46,12 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
-        button_logout = view.findViewById(R.id.button_logout);
+        button_config = view.findViewById(R.id.button_config);
         button_local = view.findViewById(R.id.button_local);
         gridView_functions = view.findViewById(R.id.gridView_functions);
         gridView_label = view.findViewById(R.id.gridView_label);
 
-        button_logout.setOnClickListener(this);
+        button_config.setOnClickListener(this);
         button_local.setOnClickListener(this);
 
         //实现两个宫格
@@ -82,8 +80,9 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button_logout:
-                logout();
+            case R.id.button_config:
+//                logout();
+                startActivity(new Intent(getActivity(),MyConfig.class));
                 break;
             case R.id.button_local:
                 startActivity(new Intent(getActivity(),MusicListActivity.class));
@@ -91,28 +90,5 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             default:
                 break;
         }
-    }
-    //logout()方法退出登录
-    private void logout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setIcon(R.drawable.ic_ask).setTitle("提示").setMessage("是否退出登录？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        startActivity(new Intent(getActivity(),LoginActivity.class));
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setCancelable(true);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
     }
 }

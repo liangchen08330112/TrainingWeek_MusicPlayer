@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainingWeek_MusicPlayer">
         <activity
+            android:name=".musicplayer.MyConfig"
+            android:exported="false" />
+        <activity
             android:name=".musicplayer.MusicListActivity"
             android:exported="false" />
         <activity
