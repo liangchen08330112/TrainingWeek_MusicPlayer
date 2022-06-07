@@ -21,13 +21,15 @@ import java.util.ArrayList;
 
 import cn.edu.sict.lc.R;
 import cn.edu.sict.lc.adapter.MyGridAdapter;
+import cn.edu.sict.lc.bean.Music;
 import cn.edu.sict.lc.bean.MyGridBean;
+import cn.edu.sict.lc.util.MusicUtil;
 
 public class MyFragment extends Fragment implements View.OnClickListener {
 
     private Button button_logout, button_local;
     private GridView gridView_functions,gridView_label;
-    int[] imgSrcs_function = {R.drawable.ic_play,R.drawable.ic_download,R.drawable.ic_cloud,
+    int[] imgSrcs_function = {R.drawable.ic_playhistory,R.drawable.ic_download,R.drawable.ic_cloud,
                               R.drawable.ic_purchase,R.drawable.ic_friends,R.drawable.ic_bookmarks,
                               R.drawable.ic_blog,R.drawable.ic_box};
     String[] titles_function = {"最近播放","本地/下载","云盘","已购","我的好友","收藏和赞","我的播客","音乐罐子"};
@@ -57,6 +59,9 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         //实现两个宫格
         initGridView(gridView_functions,imgSrcs_function,titles_function);
         initGridView(gridView_label,imgSrcs_label,titles_label);
+
+        ArrayList<Music> list = MusicUtil.scan(getActivity());
+        button_local.setText("本地音乐：共"+list.size()+"首");
     }
 
     private void initGridView(GridView gridView, int[] imgSrcs, String[] titles) {

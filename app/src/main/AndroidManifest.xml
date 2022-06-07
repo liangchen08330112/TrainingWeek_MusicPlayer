@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.sict.lc">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_myicon"
@@ -11,9 +13,6 @@
         android:theme="@style/Theme.TrainingWeek_MusicPlayer">
         <activity
             android:name=".musicplayer.MusicListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".musicplayer.MyFragment"
             android:exported="false" />
         <activity
             android:name=".musicplayer.FirstScreen"

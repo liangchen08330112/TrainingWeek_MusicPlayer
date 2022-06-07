@@ -1,7 +1,6 @@
 package cn.edu.sict.lc.musicplayer;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -10,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup radioGroup_title;
     private RadioButton radioButton_find,radioButton_list,radioButton_my;
     private ViewPager2 viewPager2;
+    private ImageView imageView_previous,imageView_next,imageView_play,imageView_list;
 
     ArrayList<Fragment> fragments;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        viewPager2 = findViewById(R.id.viewPager2);
+
 
         initData();
         HomePagerAdapter adapter = new HomePagerAdapter(MainActivity.this);
@@ -48,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
                         radioButton_my.setChecked(true);
                         break;
                     case 1:
-                        radioButton_find.setChecked(true);
+                        radioButton_list.setChecked(true);
                         break;
                     case 2:
-                        radioButton_list.setChecked(true);
+                        radioButton_find.setChecked(true);
                         break;
                     default:
                         break;
@@ -82,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         fragments = new ArrayList<>();
+        fragments.add(new FindFragment());
+        fragments.add(new ListFragment());
         fragments.add(new MyFragment());
-        fragments.add(new NetFragment());
-        fragments.add(new ConfigFragment());
     }
 
     private void initView() {
@@ -92,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
         radioButton_list = findViewById(R.id.radioButton_list);
         radioButton_find = findViewById(R.id.radioButton_find);
         radioButton_my = findViewById(R.id.radioButton_my);
+        viewPager2 = findViewById(R.id.viewPager2);
+        imageView_next = findViewById(R.id.imageView_next);
+        imageView_previous = findViewById(R.id.imageView_previous);
+        imageView_list = findViewById(R.id.imageView_list);
+        imageView_play = findViewById(R.id.imageView_play);
 
         radioGroup_title.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
