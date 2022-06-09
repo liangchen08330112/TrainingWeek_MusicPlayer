@@ -81,7 +81,6 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_config:
-//                logout();
                 startActivity(new Intent(getActivity(),MyConfig.class));
                 break;
             case R.id.button_local:

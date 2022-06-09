@@ -53,6 +53,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         try {
                             account.getDb().execSQL("insert into users(name,password)values(?,?)", new String[]{name,password});
                             Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                            Intent intent = getIntent();
+                            intent.putExtra("name",name);
+                            intent.putExtra("password",password);
+                            setResult(RESULT_OK,intent);
                         } catch (Exception e){
                             Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
                         }

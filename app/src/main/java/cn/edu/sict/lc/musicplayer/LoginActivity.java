@@ -112,7 +112,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.button_register:
                 //点击注册按钮，跳转进入注册页面
-                startActivity(new Intent(this, RegisterActivity.class));
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivityForResult(intent,REGISTER_CODE);
                 break;
             case R.id.button_login:
                 /*
@@ -181,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.requestCode=-1;
         if(resultCode==RESULT_OK){
             if(data!=null){
-                editText_username.setText(data.getStringExtra("username"));
+                editText_username.setText(data.getStringExtra("name"));
                 editText_password.setText(data.getStringExtra("password"));
                 this.requestCode=requestCode;
             }

@@ -4,74 +4,68 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import cn.edu.sict.lc.R;
 import cn.edu.sict.lc.bean.Music;
 
-public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.ViewHolder> {
+public class MusicListAdapter extends BaseAdapter {
 
-    Context context;
     ArrayList<Music> list;
+    Context context;
 
-    public MusicListAdapter(Context context, ArrayList<Music> list) {
-        this.context = context;
+    public MusicListAdapter() {
+    }
+
+    public MusicListAdapter(ArrayList<Music> list, Context context) {
         this.list = list;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.music_list_item, null);
-        ViewHolder holder = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        //返回ViewHolder对象
-        return holder;
+        this.context = context;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Music music = list.get(position);
-        holder.textView_song.setText(music.getName());
-        holder.textView_singer.setText(music.getSinger());
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public View view;
+    @Override
+    public Object getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView==null){
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(R.layout.music_list_item,null);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        }else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.textView_song.setText(list.get(position).getName());
+        holder.textView_singer.setText(list.get(position).getSinger());
+        return convertView;
+    }
+
+    public static class ViewHolder {
+        public View rootView;
         public TextView textView_song;
         public TextView textView_singer;
 
-        public ViewHolder(View view) {
-            super(view);
-            this.view = view;
-            this.textView_song = view.findViewById(R.id.textView_song);
-            this.textView_singer = view.findViewById(R.id.textView_singer);
+        public ViewHolder(View rootView) {
+            this.rootView = rootView;
+            this.textView_song = rootView.findViewById(R.id.textView_song);
+            this.textView_singer = rootView.findViewById(R.id.textView_singer);
         }
-    }
-    public interface onItemClickListener {
-        void onItemClick(RecyclerView parent, View view, int position);
-    }
-
-    public interface MyAdapter {
-        interface onRVItemClickListener {
-            void onClick(int position);
-        }
-
     }
 }
